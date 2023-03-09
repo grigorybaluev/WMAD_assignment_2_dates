@@ -18,18 +18,28 @@ struct Date {
     var month: String
     var day: Int
     var year: Int
-    
-//    print(Month(rawVal))
+    var maxDay: Int
     
     init(month: Int = 1 , day: Int = 1, year: Int = 2000) {
         if 1 <= month && month <= 12 {
             self.month = months[month-1]
             self.day = day
             self.year = year
+            
+            if ["January", "March", "May", "July", "August", "October", "December"].contains(self.month) {
+                self.maxDay = 31
+            } else if ["April", "June", "September", "November"].contains(self.month) {
+                self.maxDay = 30
+            } else if self.year % 4 == 0 {
+                self.maxDay = 29
+            } else {
+                self.maxDay = 28
+            }
         } else {
             self.month = months[0]
             self.day = 1
             self.year = 2000
+            self.maxDay = 31
         }
     }
 }
